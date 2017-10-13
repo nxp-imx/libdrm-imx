@@ -148,6 +148,11 @@ AC_ARG_ENABLE(tegra-experimental-api,
 	      [Enable support for Tegra's experimental API (default: disabled)]),
 	      [TEGRA=$enableval], [TEGRA=no])
 
+AC_ARG_ENABLE(vivante-experimental-api,
+	      AS_HELP_STRING([--enable-vivante-experimental-api],
+	      [Enable support for vivante's experimental API (default: disabled)]),
+	      [VIVANTE=$enableval], [VIVANTE=no])
+
 AC_ARG_ENABLE(vc4,
 	      AS_HELP_STRING([--disable-vc4],
 	      [Enable support for vc4's API (default: auto, enabled on arm)]),
@@ -448,6 +453,11 @@ fi
 
 AM_CONDITIONAL(HAVE_TEGRA, [test "x$TEGRA" = xyes])
 
+AM_CONDITIONAL(HAVE_VIVANTE, [test "x$VIVANTE" = xyes])
+if test "x$VIVANTE" = xyes; then
+	AC_DEFINE(HAVE_VIVANTE, 1, [Have vivante support])
+fi
+
 AM_CONDITIONAL(HAVE_VC4, [test "x$VC4" = xyes])
 if test "x$VC4" = xyes; then
 	AC_DEFINE(HAVE_VC4, 1, [Have VC4 support])
@@ -565,6 +575,8 @@ AC_CONFIG_FILES([
 	freedreno/libdrm_freedreno.pc
 	tegra/Makefile
 	tegra/libdrm_tegra.pc
+	vivante/Makefile
+	vivante/libdrm_vivante.pc
 	vc4/Makefile
 	vc4/libdrm_vc4.pc
 	etnaviv/Makefile
@@ -580,6 +592,7 @@ AC_CONFIG_FILES([
 	tests/vbltest/Makefile
 	tests/exynos/Makefile
 	tests/tegra/Makefile
+	tests/vivante/Makefile
 	tests/nouveau/Makefile
 	tests/etnaviv/Makefile
 	tests/util/Makefile
@@ -600,6 +613,7 @@ echo "  OMAP API       $OMAP"
 echo "  EXYNOS API     $EXYNOS"
 echo "  Freedreno API  $FREEDRENO (kgsl: $FREEDRENO_KGSL)"
 echo "  Tegra API      $TEGRA"
+echo "  Vivante API    $VIVANTE"
 echo "  VC4 API        $VC4"
 echo "  Etnaviv API    $ETNAVIV"
 echo ""
