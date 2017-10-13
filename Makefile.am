@@ -38,6 +38,7 @@ AM_DISTCHECK_CONFIGURE_FLAGS = \
 	--enable-freedreno-kgsl\
 	--enable-tegra-experimental-api \
 	--enable-etnaviv-experimental-api \
+	--enable-vivante-experimental-api \
 	--enable-install-test-programs \
 	--enable-cairo-tests \
 	--enable-manpages \
@@ -89,6 +90,9 @@ endif
 if HAVE_ETNAVIV
 ETNAVIV_SUBDIR = etnaviv
 endif
+if HAVE_VIVANTE
+VIVANTE_SUBDIR = vivante
+endif
 
 if BUILD_MANPAGES
 if HAVE_MANPAGES_STYLESHEET
@@ -108,6 +112,7 @@ SUBDIRS = \
 	$(FREEDRENO_SUBDIR) \
 	$(TEGRA_SUBDIR) \
 	$(VC4_SUBDIR) \
+	$(VIVANTE_SUBDIR) \
 	$(ETNAVIV_SUBDIR) \
 	data \
 	tests \

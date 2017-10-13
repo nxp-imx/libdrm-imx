@@ -42,11 +42,15 @@ extern "C" {
 #define DRM_FORMAT_R8		fourcc_code('R', '8', ' ', ' ') /* [7:0] R */
 
 /* 16 bpp Red */
-#define DRM_FORMAT_R16		fourcc_code('R', '1', '6', ' ') /* [15:0] R little endian */
+#define DRM_FORMAT_R16        fourcc_code('R', '1', '6', ' ') /* [15:0] R little endian */
 
 /* 16 bpp RG */
-#define DRM_FORMAT_RG88		fourcc_code('R', 'G', '8', '8') /* [15:0] R:G 8:8 little endian */
-#define DRM_FORMAT_GR88		fourcc_code('G', 'R', '8', '8') /* [15:0] G:R 8:8 little endian */
+#define DRM_FORMAT_RG88        fourcc_code('R', 'G', '8', '8') /* [15:0] R:G 8:8 little endian */
+#define DRM_FORMAT_GR88        fourcc_code('G', 'R', '8', '8') /* [15:0] G:R 8:8 little endian */
+
+/* 32 bpp RG */
+#define DRM_FORMAT_RG1616    fourcc_code('R', 'G', '3', '2') /* [31:0] R:G 16:16 little endian */
+#define DRM_FORMAT_GR1616    fourcc_code('G', 'R', '3', '2') /* [31:0] G:R 16:16 little endian */
 
 /* 32 bpp RG */
 #define DRM_FORMAT_RG1616	fourcc_code('R', 'G', '3', '2') /* [31:0] R:G 16:16 little endian */
@@ -294,7 +298,7 @@ extern "C" {
  * - multiple of 128 pixels for the width
  * - multiple of  32 pixels for the height
  *
- * For more information: see https://linuxtv.org/downloads/v4l-dvb-apis/re32.html
+ * For more information: see http://linuxtv.org/downloads/v4l-dvb-apis/re32.html
  */
 #define DRM_FORMAT_MOD_SAMSUNG_64_32_TILE	fourcc_mod_code(SAMSUNG, 1)
 
