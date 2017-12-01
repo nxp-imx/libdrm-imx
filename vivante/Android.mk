@@ -36,4 +36,5 @@ LOCAL_CFLAGS := -Wno-unused-parameter
 LOCAL_SHARED_LIBRARIES := libdrm
 
 LOCAL_MODULE := libdrm_vivante
+LOCAL_VENDOR_MODULE := true
 include $(BUILD_SHARED_LIBRARY)
