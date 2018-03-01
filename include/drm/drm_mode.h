@@ -630,6 +630,28 @@ struct drm_color_lut {
 	__u16 reserved;
 };
 
+enum supported_eotf_type {
+	TRADITIONAL_GAMMA_SDR = 0,
+	TRADITIONA_GAMMA_HDR,
+	SMPTE_ST2084,
+	FUTURE_EOTF
+};
+
+/* HDR Metadata */
+struct hdr_static_metadata {
+	__u16 eotf;
+	__u16 type;
+	__u16 display_primaries_x[3];
+	__u16 display_primaries_y[3];
+	__u16 white_point_x;
+	__u16 white_point_y;
+	__u16 max_mastering_display_luminance;
+	__u16 min_mastering_display_luminance;
+	__u16 max_fall;
+	__u16 max_cll;
+	__u16 min_cll;
+};
+
 #define DRM_MODE_PAGE_FLIP_EVENT 0x01
 #define DRM_MODE_PAGE_FLIP_ASYNC 0x02
 #define DRM_MODE_PAGE_FLIP_TARGET_ABSOLUTE 0x4
