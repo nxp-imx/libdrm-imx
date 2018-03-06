@@ -494,7 +494,28 @@ extern "C" {
  */
 #define DRM_FORMAT_MOD_VIVANTE_SPLIT_SUPER_TILED fourcc_mod_code(VIVANTE, 4)
 
+/*
+ * Vivante 64x64 super-tiling with compression layout
+ *
+ * This is a tiled layout using 64x64 pixel super-tiles, where each super-tile
+ * contains 8x4 groups of 2x4 tiles of 4x4 pixels each, all in row-major layout
+ * with compression.
+ */
+#define DRM_FORMAT_MOD_VIVANTE_SUPER_TILED_FC  fourcc_mod_code(VIVANTE, 5)
+
 /* NVIDIA frame buffer modifiers */
+
+/*
+ * Some modifiers take parameters, for example the number of vertical GOBs in
+ * a block. Reserve the lower 32 bits for parameters
+ */
+#define __fourcc_mod_tegra_mode_shift 32
+#define fourcc_mod_tegra_code(val, params) \
+	fourcc_mod_code(NV, ((((__u64)val) << __fourcc_mod_tegra_mode_shift) | params))
+#define fourcc_mod_tegra_mod(m) \
+	(m & ~((1ULL << __fourcc_mod_tegra_mode_shift) - 1))
+#define fourcc_mod_tegra_param(m) \
+	(m & ((1ULL << __fourcc_mod_tegra_mode_shift) - 1))
 
 /*
  * Tegra Tiled Layout, used by Tegra 2, 3 and 4.
