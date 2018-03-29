@@ -639,8 +639,8 @@ enum supported_eotf_type {
 
 /* HDR Metadata */
 struct hdr_static_metadata {
-	__u16 eotf;
-	__u16 type;
+	__u8 eotf;
+	__u8 type;
 	__u16 display_primaries_x[3];
 	__u16 display_primaries_y[3];
 	__u16 white_point_x;
@@ -649,7 +649,6 @@ struct hdr_static_metadata {
 	__u16 min_mastering_display_luminance;
 	__u16 max_fall;
 	__u16 max_cll;
-	__u16 min_cll;
 };
 
 #define DRM_MODE_PAGE_FLIP_EVENT 0x01
