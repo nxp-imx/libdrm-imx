@@ -34,6 +34,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
+#include <pthread.h>
 
 #include <sys/mman.h>
 
@@ -47,6 +48,9 @@ struct drm_vivante
 {
     /* driver fd. */
     int fd;
+
+    struct drm_vivante_bo *bo_list;
+    pthread_mutex_t mutex;
 };
 
 struct drm_vivante_bo
@@ -62,7 +66,11 @@ struct drm_vivante_bo
     uint32_t size;
 
     void *vaddr;
+
+    int refcount;
+    struct drm_vivante_bo *next;
 };
+
 
 int drm_vivante_create(int fd, struct drm_vivante **drmp)
 {
@@ -87,14 +95,77 @@ int drm_vivante_create(int fd, struct drm_vivante **drmp)
         return -ENOMEM;
 
     drm->fd = fd;
-    *drmp = drm;
+    drm->bo_list = NULL;
+    pthread_mutex_init(&drm->mutex, NULL);
 
+    *drmp = drm;
     return 0;
 }
 
 void drm_vivante_close(struct drm_vivante *drm)
 {
     free(drm);
+}
+
+static inline void drm_vivante_bo_add_locked(struct drm_vivante *drm,
+                    struct drm_vivante_bo *bo)
+{
+    bo->refcount = 1;
+    bo->next = drm->bo_list;
+    drm->bo_list = bo;
+}
+
+static void drm_vivante_bo_add(struct drm_vivante *drm,
+                    struct drm_vivante_bo *bo)
+{
+    pthread_mutex_lock(&drm->mutex);
+    drm_vivante_bo_add_locked(drm, bo);
+    pthread_mutex_unlock(&drm->mutex);
+}
+
+static struct drm_vivante_bo *drm_vivante_bo_lookup(
+                    struct drm_vivante *drm, uint32_t handle)
+{
+    struct drm_vivante_bo *bo;
+    int err;
+
+    for (bo = drm->bo_list; bo != NULL; bo = bo->next) {
+        if (bo->handle == handle)
+            break;
+    }
+    if (bo)
+        bo->refcount++;
+    return bo;
+}
+
+/* returns refcount. */
+static int drm_vivante_bo_decref(struct drm_vivante *drm,
+                struct drm_vivante_bo *bo)
+{
+    int ret;
+
+    pthread_mutex_lock(&drm->mutex);
+    ret = --bo->refcount;
+
+    if (ret > 0)
+        goto out;
+
+    /* unlink bo. */
+    if (bo == drm->bo_list)
+        drm->bo_list = bo->next;
+    else {
+        struct drm_vivante_bo *prev = NULL;
+        for (prev = drm->bo_list; prev != NULL; prev = prev->next) {
+            if (prev->next == bo) {
+                prev->next = bo->next;
+                break;
+            }
+        }
+    }
+
+out:
+    pthread_mutex_unlock(&drm->mutex);
+    return ret;
 }
 
 static int drm_vivante_bo_init(struct drm_vivante *drm,
@@ -143,6 +214,7 @@ int drm_vivante_bo_create(struct drm_vivante *drm,
     bo->flags = flags;
     bo->size = size;
 
+    drm_vivante_bo_add(drm, bo);
     *bop = bo;
     return 0;
 }
@@ -205,6 +277,7 @@ int drm_vivante_bo_create_with_ts(struct drm_vivante *drm,
     bo->flags = flags;
     bo->size = size;
 
+    drm_vivante_bo_add(drm, bo);
     *bop = bo;
     return 0;
 
@@ -251,14 +324,23 @@ int drm_vivante_bo_import_from_fd(struct drm_vivante *drm, int fd,
     if (!drm || !bop || fd < 0)
         return -EINVAL;
 
-    err = drm_vivante_bo_init(drm, &bo);
-    if (err)
-        return err;
+    pthread_mutex_lock(&drm->mutex);
 
     if (drmPrimeFDToHandle(drm->fd, fd, &handle)) {
         err = -errno;
         goto err_close;
     }
+
+    bo = drm_vivante_bo_lookup(drm, handle);
+    if (bo) {
+        pthread_mutex_unlock(&drm->mutex);
+        *bop = bo;
+        return 0;
+    }
+
+    err = drm_vivante_bo_init(drm, &bo);
+    if (err)
+        goto err_close;
     bo->handle = handle;
 
     err = drm_vivante_bo_query(bo, DRM_VIV_GEM_PARAM_SIZE, &size);
@@ -266,10 +348,15 @@ int drm_vivante_bo_import_from_fd(struct drm_vivante *drm, int fd,
         goto err_close;
     bo->size = (uint32_t)size;
 
+    drm_vivante_bo_add_locked(drm, bo);
+    pthread_mutex_unlock(&drm->mutex);
+
     *bop = bo;
     return 0;
 
 err_close:
+    pthread_mutex_unlock(&drm->mutex);
+
     if (handle > 0) {
         struct drm_gem_close close_args = {
             .handle = handle,
@@ -286,6 +373,9 @@ void drm_vivante_bo_destroy(struct drm_vivante_bo *bo)
     struct drm_gem_close close_args;
 
     if (!bo)
+        return;
+
+    if (drm_vivante_bo_decref(bo->drm, bo) != 0)
         return;
 
     if (bo->vaddr) {
