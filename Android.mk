@@ -72,4 +72,4 @@ LOCAL_VENDOR_MODULE := true
 include $(LIBDRM_COMMON_MK)
 include $(BUILD_SHARED_LIBRARY)
 
-include $(call all-makefiles-under,vivante)
+include $(LOCAL_PATH)/vivante/Android.mk
