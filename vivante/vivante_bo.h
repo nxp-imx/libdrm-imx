@@ -33,6 +33,10 @@
 #include <stdlib.h>
 #include <vivante_drm.h>
 
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
 struct drm_vivante_bo;
 struct drm_vivante;
 
@@ -83,5 +87,9 @@ int drm_vivante_bo_get_timestamp(struct drm_vivante_bo *bo,
 
 int drm_vivante_bo_ref_node(struct drm_vivante_bo *bo,
             uint32_t *node, uint32_t *ts_node);
+
+#if defined(__cplusplus)
+}
+#endif
 
 #endif /* __DRM_VIVANTE_H__ */
