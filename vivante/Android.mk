@@ -33,7 +33,10 @@ LOCAL_SRC_FILES := vivante_bo.c
 
 LOCAL_CFLAGS := -Wno-unused-parameter
 
-LOCAL_SHARED_LIBRARIES := libdrm
+LOCAL_C_INCLUDES := \
+       $(LIBDRM_TOP)/include/drm
+
+LOCAL_SHARED_LIBRARIES := libdrm_android
 
 LOCAL_MODULE := libdrm_vivante
 LOCAL_VENDOR_MODULE := true
