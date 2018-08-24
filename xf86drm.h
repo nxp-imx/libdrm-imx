@@ -469,6 +469,23 @@ do {	register unsigned int __old __asm("o0");		\
 		: "cr0", "memory");			\
 	} while (0)
 
+#elif defined(__arm__)
+       #undef DRM_DEV_MODE
+       #define DRM_DEV_MODE     (S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH)
+
+       #define DRM_CAS(lock,old,new,__ret)             \
+       do {                                            \
+               __asm__ __volatile__ (                  \
+                       "1: ldrex %0, [%1]\n"           \
+                       "   teq %0, %2\n"               \
+                       "   ite eq\n"                   \
+                       "   strexeq %0, %3, [%1]\n"     \
+                       "   movne   %0, #1\n"           \
+               : "=&r" (__ret)                         \
+               : "r" (lock), "r" (old), "r" (new)      \
+               : "cc","memory");                       \
+       } while (0)
+
 #endif /* architecture */
 #endif /* __GNUC__ >= 2 */
 
