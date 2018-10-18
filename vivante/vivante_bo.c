@@ -231,7 +231,8 @@ int drm_vivante_bo_create_with_ts(struct drm_vivante *drm,
     };
     struct drm_gem_close close_args;
     struct drm_viv_gem_attach_aux aux_args;
-    const uint32_t valid_ts_flags = DRM_VIV_GEM_CONTIGUOUS | DRM_VIV_GEM_SECURE;
+    const uint32_t valid_ts_flags = DRM_VIV_GEM_CONTIGUOUS |
+                        DRM_VIV_GEM_SECURE | DRM_VIV_GEM_CMA_LIMIT;
 
     if (size == 0)
         return -EINVAL;
