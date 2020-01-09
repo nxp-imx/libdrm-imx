@@ -168,6 +168,15 @@ if _vc4 != 'false'
   with_vc4 = _vc4 == 'true' or ['arm', 'aarch64'].contains(host_machine.cpu_family())
 endif
 
+with_vivante = false
+_vivante = get_option('vivante')
+if _vivante == 'true'
+  if not with_atomics
+    error('libdrm_vivante requires atomics.')
+  endif
+  with_vivante = true
+endif
+
 # XXX: Apparently only freebsd and dragonfly bsd actually need this (and
 # gnu/kfreebsd), not openbsd and netbsd
 with_libkms = false
@@ -351,6 +360,7 @@ install_headers(
   'include/drm/savage_drm.h', 'include/drm/sis_drm.h',
   'include/drm/tegra_drm.h', 'include/drm/vc4_drm.h',
   'include/drm/via_drm.h', 'include/drm/virtgpu_drm.h',
+  'include/drm/vivante_drm.h',
   subdir : 'libdrm',
 )
 if with_vmwgfx
@@ -398,6 +408,9 @@ endif
 if with_etnaviv
   subdir('etnaviv')
 endif
+if with_vivante
+  subdir('vivante')
+endif
 if with_man_pages
   subdir('man')
 endif
@@ -418,5 +431,6 @@ message('  EXYNOS API     @0@'.format(with_exynos))
 message('  Freedreno API  @0@ (kgsl: @1@)'.format(with_freedreno, with_freedreno_kgsl))
 message('  Tegra API      @0@'.format(with_tegra))
 message('  VC4 API        @0@'.format(with_vc4))
+message('  Vivante API    @0@'.format(with_etnaviv))
 message('  Etnaviv API    @0@'.format(with_etnaviv))
 message('')
