@@ -72,6 +72,13 @@ option(
   description : '''Enable support for vc4's KMS API.''',
 )
 option(
+  'vivante',
+  type : 'combo',
+  value : 'false',
+  choices : ['true', 'false', 'auto'],
+  description : '''Enable support for vivante's propriatary experimental KMS API.''',
+)
+option(
   'etnaviv',
   type : 'feature',
   description : '''Enable support for etnaviv's KMS API.''',
