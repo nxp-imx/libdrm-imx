@@ -189,6 +189,16 @@ if not _vc4.disabled()
 endif
 summary('VC4', with_vc4)
 
+with_vivante = false
+_vivante = get_option('vivante')
+if _vivante == 'true'
+  if not with_atomics
+    error('libdrm_vivante requires atomics.')
+  endif
+  with_vivante = true
+endif
+summary('Vivante', with_vivante)
+
 # Among others FreeBSD does not have a separate dl library.
 if not cc.has_function('dlsym')
   dep_dl = cc.find_library('dl', required : with_nouveau)
@@ -338,6 +348,7 @@ install_headers(
   'include/drm/savage_drm.h', 'include/drm/sis_drm.h',
   'include/drm/tegra_drm.h', 'include/drm/vc4_drm.h',
   'include/drm/via_drm.h', 'include/drm/virtgpu_drm.h',
+  'include/drm/vivante_drm.h',
   subdir : 'libdrm',
 )
 if with_vmwgfx
@@ -380,6 +391,9 @@ if with_vc4
 endif
 if with_etnaviv
   subdir('etnaviv')
+endif
+if with_vivante
+  subdir('vivante')
 endif
 if with_man_pages
   subdir('man')
