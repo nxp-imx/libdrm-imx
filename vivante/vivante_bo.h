@@ -67,6 +67,8 @@ void drm_vivante_bo_destroy(struct drm_vivante_bo *bo);
 
 /* do not close the handle directly. */
 int drm_vivante_bo_get_handle(struct drm_vivante_bo *bo, uint32_t *handle);
+int drm_vivante_bo_get_ts_fd(struct drm_vivante_bo *bo, int *value);
+int drm_vivante_bo_set_ts_fd(struct drm_vivante_bo *bo, int value);
 
 int drm_vivante_bo_mmap(struct drm_vivante_bo *bo, void **vaddr);
 int drm_vivante_bo_munmap(struct drm_vivante_bo *bo);
