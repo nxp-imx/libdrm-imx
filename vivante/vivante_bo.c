@@ -61,6 +61,7 @@ struct drm_vivante_bo
 
     /* export prime fd if any */
     int fd;
+    int tsFd;
 
     uint32_t flags;
     uint32_t size;
@@ -179,6 +180,7 @@ static int drm_vivante_bo_init(struct drm_vivante *drm,
 
     bo->drm = drm;
     bo->fd = -1;
+    bo->tsFd = -1;
     bo->vaddr = NULL;
 
     *bop = bo;
@@ -383,6 +385,11 @@ void drm_vivante_bo_destroy(struct drm_vivante_bo *bo)
         drm_vivante_bo_munmap(bo);
     }
 
+    if(bo->tsFd >=0) {
+        close(bo->tsFd);
+        bo->tsFd = -1;
+    }
+
     close_args.handle = bo->handle;
     drmIoctl(bo->drm->fd, DRM_IOCTL_GEM_CLOSE, &close_args);
 
@@ -395,6 +402,24 @@ int drm_vivante_bo_get_handle(struct drm_vivante_bo *bo, uint32_t *handle)
         return -EINVAL;
 
     *handle = bo->handle;
+    return 0;
+}
+
+int drm_vivante_bo_get_ts_fd(struct drm_vivante_bo *bo, int *value)
+{
+    if (!bo)
+        return -EINVAL;
+
+    *value = bo->tsFd;
+    return 0;
+}
+
+int drm_vivante_bo_set_ts_fd(struct drm_vivante_bo *bo, int value)
+{
+    if (!bo)
+        return -EINVAL;
+
+    bo->tsFd = value;
     return 0;
 }
 
