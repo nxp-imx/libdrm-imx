@@ -43,6 +43,7 @@ struct drm_vivante;
 struct drm_vivante_bo_tiling {
     uint32_t tiling_mode;
     uint32_t ts_mode;
+    uint32_t ts_cache_mode;
     uint64_t clear_value;
 };
 

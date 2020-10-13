@@ -512,6 +512,7 @@ int drm_vivante_bo_set_tiling(struct drm_vivante_bo *bo,
         .handle = bo->handle,
         .tiling_mode = tiling->tiling_mode,
         .ts_mode = tiling->ts_mode,
+        .ts_cache_mode = tiling->ts_cache_mode,
         .clear_value = tiling->clear_value,
     };
 
@@ -535,6 +536,7 @@ int drm_vivante_bo_get_tiling(struct drm_vivante_bo *bo,
 
     tiling->tiling_mode = args.tiling_mode;
     tiling->ts_mode = args.ts_mode;
+    tiling->ts_cache_mode = args.ts_cache_mode;
     tiling->clear_value = args.clear_value;
 
     return 0;
