@@ -381,9 +381,7 @@ void drm_vivante_bo_destroy(struct drm_vivante_bo *bo)
     if (drm_vivante_bo_decref(bo->drm, bo) != 0)
         return;
 
-    if (bo->vaddr) {
-        drm_vivante_bo_munmap(bo);
-    }
+    drm_vivante_bo_munmap(bo);
 
     if(bo->tsFd >=0) {
         close(bo->tsFd);
@@ -446,18 +444,25 @@ int drm_vivante_bo_mmap(struct drm_vivante_bo *bo, void **vaddr)
     if (!bo || !vaddr)
         return -EINVAL;
 
+    pthread_mutex_lock(&(bo->drm->mutex));
+
     /* already locked */
-    if (bo->vaddr)
+    if (bo->vaddr) {
+        pthread_mutex_unlock(&(bo->drm->mutex));
         return -EPERM;
-        
+    }
+
     args.handle = bo->handle;
     args.cacheable = (bo->flags & DRM_VIV_GEM_CACHED) ? 1 : 0;
-    if (drmIoctl(bo->drm->fd, DRM_IOCTL_VIV_GEM_LOCK, &args))
+    if (drmIoctl(bo->drm->fd, DRM_IOCTL_VIV_GEM_LOCK, &args)) {
+        pthread_mutex_unlock(&(bo->drm->mutex));
         return -errno;
+    }
 
     bo->vaddr = (void *)(uintptr_t)args.logical;
 
     *vaddr = bo->vaddr;
+    pthread_mutex_unlock(&(bo->drm->mutex));
     return 0;
 }
 
@@ -465,20 +470,31 @@ int drm_vivante_bo_munmap(struct drm_vivante_bo *bo)
 {
     struct drm_viv_gem_unlock args;
 
-    if (!bo || !bo->vaddr)
+    if (!bo)
         return -EINVAL;
+
+    pthread_mutex_lock(&(bo->drm->mutex));
+    if (!bo->vaddr) {
+        pthread_mutex_unlock(&(bo->drm->mutex));
+        return -EINVAL;
+    }
 
     args.handle = bo->handle;
     if (bo->flags & DRM_VIV_GEM_CACHED) {
         int err = clean_bo_cache(bo);
-        if (err)
+        if (err) {
+            pthread_mutex_unlock(&(bo->drm->mutex));
             return err;
+        }
     }
 
-    if (drmIoctl(bo->drm->fd, DRM_IOCTL_VIV_GEM_UNLOCK, &args))
+    if (drmIoctl(bo->drm->fd, DRM_IOCTL_VIV_GEM_UNLOCK, &args)) {
+        pthread_mutex_unlock(&(bo->drm->mutex));
         return -errno;
+    }
 
     bo->vaddr = NULL;
+    pthread_mutex_unlock(&(bo->drm->mutex));
     return 0;
 }
 
