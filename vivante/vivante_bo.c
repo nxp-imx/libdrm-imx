@@ -252,9 +252,9 @@ int drm_vivante_bo_create_with_ts(struct drm_vivante *drm,
     }
     bo->handle = args.handle;
 
-    /* alloc ts handle, size is master buffer size / 256, align up to 64B. */
+    /* alloc ts handle, size is master buffer size / 256, align up to 256B. */
     args.flags = flags & valid_ts_flags;
-    args.size  = ((size >> 8) + 0x3f) & ~0x3f;
+    args.size  = (((size >> 8) + 0xff) & ~0xff) + 0x100;
     if (drmIoctl(drm->fd, DRM_IOCTL_VIV_GEM_CREATE, &args)) {
         err = -errno;
         goto err_close;
