@@ -15,6 +15,20 @@
 subdirs = ["vivante/*"]
 build = ["Android.sources.bp"]
 
+genrule {
+    name: "format_mod_static_table",
+    srcs: [
+        "include/drm/drm_fourcc.h",
+    ],
+    out: [
+        "generated_static_table_fourcc.h",
+    ],
+    tool_files: [
+        "gen_table_fourcc.py",
+    ],
+    cmd: "python3 $(location gen_table_fourcc.py) $(in) $(out)",
+}
+
 cc_defaults {
     name: "libdrm_android_defaults",
     cflags: [
@@ -38,6 +52,9 @@ cc_library {
     defaults: [
         "libdrm_android_defaults",
         "libdrm_android_sources",
+    ],
+    generated_headers: [
+        "format_mod_static_table",
     ],
     shared_libs: ["libcutils",],
     export_include_dirs: ["include/drm", "android"],
