@@ -733,6 +733,13 @@ struct drm_color_lut {
 	__u16 reserved;
 };
 
+enum supported_eotf_type {
+	TRADITIONAL_GAMMA_SDR = 0,
+	TRADITIONA_GAMMA_HDR,
+	SMPTE_ST2084,
+	FUTURE_EOTF
+};
+
 /**
  * struct hdr_metadata_infoframe - HDR Metadata Infoframe Data.
  *
