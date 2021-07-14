@@ -463,6 +463,7 @@ extern "C" {
 #define DRM_FORMAT_MOD_VENDOR_AMLOGIC 0x0a
 #define DRM_FORMAT_MOD_VENDOR_MTK     0x0b
 #define DRM_FORMAT_MOD_VENDOR_APPLE   0x0c
+#define DRM_FORMAT_MOD_VENDOR_AMPHION  0xf0
 
 /* add more to the end as needed */
 
@@ -1414,6 +1415,16 @@ drm_fourcc_canonicalize_nvidia_format_mod(__u64 modifier)
  * both in row-major order.
  */
 #define DRM_FORMAT_MOD_ALLWINNER_TILED fourcc_mod_code(ALLWINNER, 1)
+
+/* Amphion tiled layout */
+
+/*
+ * Amphion 8x128 tiling layout
+ *
+ * This is a tiled layout using 8x128 pixel vertical strips, where each strip
+ * contains 1x16 groups of 8x8 pixels in a row-major layout.
+ */
+#define DRM_FORMAT_MOD_AMPHION_TILED fourcc_mod_code(AMPHION, 1)
 
 /*
  * Amlogic Video Framebuffer Compression modifiers
