@@ -151,7 +151,7 @@ static __inline int drm_property_type_is(drmModePropertyPtr property,
 	return property->flags & type;
 }
 
-static inline uint32_t drmModeGetPropertyType(const drmModePropertyRes *prop)
+static __inline uint32_t drmModeGetPropertyType(const drmModePropertyRes *prop)
 {
 	return prop->flags & (DRM_MODE_PROP_LEGACY_TYPE | DRM_MODE_PROP_EXTENDED_TYPE);
 }
