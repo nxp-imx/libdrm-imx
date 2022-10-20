@@ -150,6 +150,7 @@ static const char * const modules[] = {
 	"komeda",
 	"imx-dcss",
 	"mxsfb-drm",
+	"imx-dcnano",
 };
 
 int util_open(const char *device, const char *module)
