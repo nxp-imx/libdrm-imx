@@ -1,0 +1,9 @@
+Package:                     libdrm-imx.git
+Version:                     2.4.116.imx
+Outgoing License:            MIT
+License File:                LICENSE
+Type of Content:             source
+Description and comments:    i.MX DRM Direct Rendering Manager
+Release Location:            https://github.com/nxp-imx/libdrm-imx -b lf-6.6.3-1.0.0
+Origin:                      NXP (MIT)
+
