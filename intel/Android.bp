@@ -20,7 +20,6 @@ cc_library_shared {
         "libdrm_android_defaults",
         "libdrm_android_intel_sources",
     ],
-    srcs: ["intel_chipset.c"],
     vendor: true,
     shared_libs: ["libdrm_android"],
 }
