@@ -30,7 +30,7 @@ libdrm_vivante = shared_library(
   include_directories : [inc_root, inc_drm],
   link_with : libdrm,
   c_args : libdrm_c_args,
-  dependencies : [dep_pthread_stubs, dep_rt, dep_atomic_ops],
+  dependencies : [dep_threads, dep_rt, dep_atomic_ops],
   version : '1.0.0',
   install : true,
 )
