@@ -1,5 +1,6 @@
 //
 // Copyright © 2011-2012 Intel Corporation
+// Copyright 2024 NXP
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the "Software"),
@@ -21,11 +22,11 @@
 // IN THE SOFTWARE.
 //
 
-subdirs = ["*"]
+subdirs = ["vivante/*"]
 build = ["Android.sources.bp"]
 
 cc_defaults {
-    name: "libdrm_defaults",
+    name: "libdrm_android_defaults",
     cflags: [
         // XXX: Consider moving these to config.h analogous to autoconf.
         "-DMAJOR_IN_SYSMACROS=1",
@@ -48,10 +49,10 @@ cc_defaults {
 }
 
 cc_library_headers {
-    name: "libdrm_headers",
+    name: "libdrm_android_headers",
     vendor_available: true,
     host_supported: true,
-    defaults: ["libdrm_defaults"],
+    defaults: ["libdrm_android_defaults"],
     export_include_dirs: ["include/drm", "android"],
     apex_available: [
         "//apex_available:platform",
@@ -61,13 +62,13 @@ cc_library_headers {
 
 // Library for the device
 cc_library {
-    name: "libdrm",
+    name: "libdrm_android",
     recovery_available: true,
     vendor_available: true,
     host_supported: true,
     defaults: [
-        "libdrm_defaults",
-        "libdrm_sources",
+        "libdrm_android_defaults",
+        "libdrm_android_sources",
     ],
 
     export_include_dirs: ["include/drm", "android"],
