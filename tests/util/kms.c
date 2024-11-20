@@ -128,6 +128,7 @@ static const char * const modules[] = {
 	"vkms",
 	"tidss",
 	"imx-dcnano",
+	"imx95-dpu",
 };
 
 int util_open(const char *device, const char *module)
