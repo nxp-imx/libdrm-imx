@@ -1,0 +1,53 @@
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "spdxVersion": "SPDX-2.3",
+  "creationInfo": {
+    "created": "2025-08-24T08:14:52Z",
+    "creators": [
+      "Organization: NXP"
+    ],
+    "licenseListVersion": "3.20"
+  },
+  "name": "libdrm-imx-LF_6.12.34_2.1.0",
+  "dataLicense": "CC0-1.0",
+  "documentNamespace": "https://nxp.com/spdx/34db9557-feba-43de-ae12-1a6dbcd32a7a",
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-package-34db9557-feba-43de-ae12-1a6dbcd32a7a",
+      "name": "libdrm-imx",
+      "versionInfo": "LF_6.12.34_2.1.0",
+      "licenseConcluded": "(MIT)",
+      "licenseDeclared": "(MIT)",
+      "downloadLocation": "https://github.com/nxp-imx/libdrm-imx -b lf-6.12.34-2.1.0",
+      "originator": "Organization: libdrm-imx",
+      "supplier": "NOASSERTION",
+      "externalRefs": [],
+      "filesAnalyzed": false
+    },
+    {
+      "SPDXID": "SPDXRef-package-77c5a915-00c4-4c35-89f8-bb503dadc8d7",
+      "name": "libdrm-dev",
+      "versionInfo": "2.4.116",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "homepage": "https://cgit.freedesktop.org/mesa/drm/",
+      "downloadLocation": "NOASSERTION",
+      "originator": "Organization: libdrm-dev",
+      "supplier": "NOASSERTION",
+      "externalRefs": [],
+      "filesAnalyzed": false
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-package-34db9557-feba-43de-ae12-1a6dbcd32a7a"
+    },
+    {
+      "spdxElementId": "SPDXRef-package-34db9557-feba-43de-ae12-1a6dbcd32a7a",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-package-77c5a915-00c4-4c35-89f8-bb503dadc8d7"
+    }
+  ]
+}
