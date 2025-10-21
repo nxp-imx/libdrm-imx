@@ -1,6 +1,0 @@
-prebuilt_etc {
-    name: "amdgpu.ids",
-    proprietary: true,
-    sub_dir: "hwdata",
-    src: "amdgpu.ids",
-}
