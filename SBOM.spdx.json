@@ -2,23 +2,23 @@
   "SPDXID": "SPDXRef-DOCUMENT",
   "spdxVersion": "SPDX-2.3",
   "creationInfo": {
-    "created": "2025-08-24T08:14:52Z",
+    "created": "2025-11-12T07:03:20Z",
     "creators": [
       "Organization: NXP"
     ],
     "licenseListVersion": "3.20"
   },
-  "name": "libdrm-imx-LF_6.12.34_2.1.0",
+  "name": "libdrm-imx-LF_6.12.49_2.2.0",
   "dataLicense": "CC0-1.0",
-  "documentNamespace": "https://nxp.com/spdx/34db9557-feba-43de-ae12-1a6dbcd32a7a",
+  "documentNamespace": "https://nxp.com/spdx/3f35a956-b149-4a68-9b43-8aa26f1ec29d",
   "packages": [
     {
-      "SPDXID": "SPDXRef-package-34db9557-feba-43de-ae12-1a6dbcd32a7a",
+      "SPDXID": "SPDXRef-package-3f35a956-b149-4a68-9b43-8aa26f1ec29d",
       "name": "libdrm-imx",
-      "versionInfo": "LF_6.12.34_2.1.0",
+      "versionInfo": "LF_6.12.49_2.2.0",
       "licenseConcluded": "(MIT)",
       "licenseDeclared": "(MIT)",
-      "downloadLocation": "https://github.com/nxp-imx/libdrm-imx -b lf-6.12.34-2.1.0",
+      "downloadLocation": "https://github.com/nxp-imx/libdrm-imx -b lf-6.12.49-2.2.0",
       "originator": "Organization: libdrm-imx",
       "supplier": "NOASSERTION",
       "externalRefs": [],
@@ -42,10 +42,10 @@
     {
       "spdxElementId": "SPDXRef-DOCUMENT",
       "relationshipType": "DESCRIBES",
-      "relatedSpdxElement": "SPDXRef-package-34db9557-feba-43de-ae12-1a6dbcd32a7a"
+      "relatedSpdxElement": "SPDXRef-package-3f35a956-b149-4a68-9b43-8aa26f1ec29d"
     },
     {
-      "spdxElementId": "SPDXRef-package-34db9557-feba-43de-ae12-1a6dbcd32a7a",
+      "spdxElementId": "SPDXRef-package-3f35a956-b149-4a68-9b43-8aa26f1ec29d",
       "relationshipType": "CONTAINS",
       "relatedSpdxElement": "SPDXRef-package-77c5a915-00c4-4c35-89f8-bb503dadc8d7"
     }
