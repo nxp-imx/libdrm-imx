@@ -2,39 +2,70 @@
   "SPDXID": "SPDXRef-DOCUMENT",
   "spdxVersion": "SPDX-2.3",
   "creationInfo": {
-    "created": "2025-08-24T08:14:52Z",
+    "created": "2026-01-20T09:34:47Z",
     "creators": [
       "Organization: NXP"
     ],
-    "licenseListVersion": "3.20"
+    "licenseListVersion": "3.26"
   },
-  "name": "libdrm-imx-LF_6.12.34_2.1.0",
+  "name": "libdrm-imx-LF_6.18.2_IMX952_ER",
   "dataLicense": "CC0-1.0",
-  "documentNamespace": "https://nxp.com/spdx/34db9557-feba-43de-ae12-1a6dbcd32a7a",
+  "hasExtractedLicensingInfos": [
+    {
+      "name": "Expat License",
+      "licenseId": "LicenseRef-19bd4215-a4d4-4ffe-8e54-fcd9558d4e96",
+      "extractedText": "NONE"
+    }
+  ],
+  "documentNamespace": "https://nxp.com/spdx/436a0436-74ad-4fc6-bf53-a3dc907ca3c9",
   "packages": [
     {
-      "SPDXID": "SPDXRef-package-34db9557-feba-43de-ae12-1a6dbcd32a7a",
+      "SPDXID": "SPDXRef-package-436a0436-74ad-4fc6-bf53-a3dc907ca3c9",
       "name": "libdrm-imx",
-      "versionInfo": "LF_6.12.34_2.1.0",
+      "versionInfo": "LF_6.18.2_IMX952_ER",
       "licenseConcluded": "(MIT)",
       "licenseDeclared": "(MIT)",
-      "downloadLocation": "https://github.com/nxp-imx/libdrm-imx -b lf-6.12.34-2.1.0",
+      "downloadLocation": "https://github.com/nxp-imx/libdrm-imx -b lf-6.18.2-imx952-er1",
       "originator": "Organization: libdrm-imx",
       "supplier": "NOASSERTION",
       "externalRefs": [],
       "filesAnalyzed": false
     },
     {
-      "SPDXID": "SPDXRef-package-77c5a915-00c4-4c35-89f8-bb503dadc8d7",
-      "name": "libdrm-dev",
-      "versionInfo": "2.4.116",
+      "SPDXID": "SPDXRef-package-9fb83b58-2204-4c04-b9b3-ec54d60f1839",
+      "name": "libdrm",
+      "versionInfo": "2.4.21",
       "licenseConcluded": "MIT",
-      "licenseDeclared": "MIT",
-      "homepage": "https://cgit.freedesktop.org/mesa/drm/",
+      "licenseDeclared": "NOASSERTION",
+      "homepage": "http://cgit.freedesktop.org/mesa/drm/",
       "downloadLocation": "NOASSERTION",
-      "originator": "Organization: libdrm-dev",
+      "originator": "Organization: libdrm",
       "supplier": "NOASSERTION",
       "externalRefs": [],
+      "filesAnalyzed": false
+    },
+    {
+      "SPDXID": "SPDXRef-package-850964bb-9417-4cc6-9a97-13e341f61c2c",
+      "name": "libdrm-dev",
+      "versionInfo": "2.4.127",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "LicenseRef-19bd4215-a4d4-4ffe-8e54-fcd9558d4e96",
+      "homepage": "https://cgit.freedesktop.org/mesa/drm/",
+      "downloadLocation": "NOASSERTION",
+      "originator": "Organization: opensuse",
+      "supplier": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "OTHER",
+          "referenceLocator": "f654e41c-a8f9-4b9b-a0c0-40b883509e28",
+          "referenceType": "BlackDuck-ComponentOrigin"
+        },
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:rpm/opensuse/libdrm@2.4.127-1.1?arch=s390x",
+          "referenceType": "purl"
+        }
+      ],
       "filesAnalyzed": false
     }
   ],
@@ -42,12 +73,17 @@
     {
       "spdxElementId": "SPDXRef-DOCUMENT",
       "relationshipType": "DESCRIBES",
-      "relatedSpdxElement": "SPDXRef-package-34db9557-feba-43de-ae12-1a6dbcd32a7a"
+      "relatedSpdxElement": "SPDXRef-package-436a0436-74ad-4fc6-bf53-a3dc907ca3c9"
     },
     {
-      "spdxElementId": "SPDXRef-package-34db9557-feba-43de-ae12-1a6dbcd32a7a",
+      "spdxElementId": "SPDXRef-package-436a0436-74ad-4fc6-bf53-a3dc907ca3c9",
       "relationshipType": "CONTAINS",
-      "relatedSpdxElement": "SPDXRef-package-77c5a915-00c4-4c35-89f8-bb503dadc8d7"
+      "relatedSpdxElement": "SPDXRef-package-850964bb-9417-4cc6-9a97-13e341f61c2c"
+    },
+    {
+      "spdxElementId": "SPDXRef-package-436a0436-74ad-4fc6-bf53-a3dc907ca3c9",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-package-9fb83b58-2204-4c04-b9b3-ec54d60f1839"
     }
   ]
 }
