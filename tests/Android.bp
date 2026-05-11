@@ -1,0 +1,80 @@
+// Copyright 2026 NXP
+// libdrm test utilities and tools
+
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+cc_library_static {
+    name: "libdrm_android_util",
+    vendor: true,
+    
+    defaults: [
+        "libdrm_android_defaults",
+    ],
+    
+    srcs: [
+        "util/format.c",
+        "util/kms.c",
+        "util/pattern.c",
+    ],
+    
+    cflags: [
+        "-DHAVE_CAIRO=0",
+        "-Wno-pointer-arith",
+    ],
+    
+    local_include_dirs: [
+        "util",
+    ],
+    
+    header_libs: [
+        "libdrm_android_headers",
+    ],
+    
+    shared_libs: [
+        "libdrm_android",
+    ],
+    
+    export_include_dirs: [
+        ".",
+    ],
+}
+
+cc_binary {
+    name: "modetest_android",
+    vendor: true,
+    
+    defaults: [
+        "libdrm_android_defaults",
+    ],
+    
+    srcs: [
+        "modetest/buffers.c",
+        "modetest/cursor.c",
+        "modetest/modetest.c",
+    ],
+    
+    cflags: [
+        "-DHAVE_CAIRO=0",
+        "-Wno-pointer-arith",
+    ],
+    
+    local_include_dirs: [
+        "modetest",
+    ],
+    
+    header_libs: [
+        "libdrm_android_headers",
+    ],
+    
+    static_libs: [
+        "libdrm_android_util",
+    ],
+    
+    shared_libs: [
+        "libdrm_android",
+        "liblog",
+        "libcutils",
+    ],
+}
