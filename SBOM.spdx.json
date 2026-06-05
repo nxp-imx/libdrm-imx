@@ -2,67 +2,54 @@
   "SPDXID": "SPDXRef-DOCUMENT",
   "spdxVersion": "SPDX-2.3",
   "creationInfo": {
-    "created": "2026-01-20T09:34:47Z",
+    "created": "2026-06-02T02:54:28Z",
     "creators": [
       "Organization: NXP"
     ],
     "licenseListVersion": "3.26"
   },
-  "name": "libdrm-imx-LF_6.18.2_IMX952_ER",
+  "name": "libdrm-imx-lf-6.18.20-2.0.0",
   "dataLicense": "CC0-1.0",
   "hasExtractedLicensingInfos": [
     {
       "name": "Expat License",
       "licenseId": "LicenseRef-19bd4215-a4d4-4ffe-8e54-fcd9558d4e96",
-      "extractedText": "NONE"
+      "extractedText": "Expat License\n=============\n\nCopyright (c) 1998, 1999, 2000 Thai Open Source Software Center Ltd\n                               and Clark Cooper\nCopyright (c) 2001, 2002, 2003, 2004, 2005, 2006 Expat maintainers.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in the\nSoftware without restriction, including without limitation the rights to use,\ncopy, modify, merge, publish, distribute, sublicense, and/or sell copies of the\nSoftware, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN\nAN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
     }
   ],
-  "documentNamespace": "https://nxp.com/spdx/436a0436-74ad-4fc6-bf53-a3dc907ca3c9",
+  "documentNamespace": "https://nxp.com/spdx/5d9545cd-9d58-40d8-9fec-59c5ee5c19a0",
   "packages": [
     {
-      "SPDXID": "SPDXRef-package-436a0436-74ad-4fc6-bf53-a3dc907ca3c9",
+      "SPDXID": "SPDXRef-package-5d9545cd-9d58-40d8-9fec-59c5ee5c19a0",
       "name": "libdrm-imx",
-      "versionInfo": "LF_6.18.2_IMX952_ER",
-      "licenseConcluded": "(MIT)",
-      "licenseDeclared": "(MIT)",
-      "downloadLocation": "https://github.com/nxp-imx/libdrm-imx -b lf-6.18.2-imx952-er1",
-      "originator": "Organization: libdrm-imx",
-      "supplier": "NOASSERTION",
-      "externalRefs": [],
-      "filesAnalyzed": false
-    },
-    {
-      "SPDXID": "SPDXRef-package-9fb83b58-2204-4c04-b9b3-ec54d60f1839",
-      "name": "libdrm",
-      "versionInfo": "2.4.21",
+      "versionInfo": "lf-6.18.20-2.0.0",
       "licenseConcluded": "MIT",
-      "licenseDeclared": "NOASSERTION",
-      "homepage": "http://cgit.freedesktop.org/mesa/drm/",
-      "downloadLocation": "NOASSERTION",
-      "originator": "Organization: libdrm",
+      "licenseDeclared": "MIT",
+      "downloadLocation": "https://github.com/nxp-imx/libdrm-imx -b lf-6.18.20-2.0.0",
+      "originator": "Organization: NXP",
       "supplier": "NOASSERTION",
       "externalRefs": [],
       "filesAnalyzed": false
     },
     {
-      "SPDXID": "SPDXRef-package-850964bb-9417-4cc6-9a97-13e341f61c2c",
+      "SPDXID": "SPDXRef-package-5d9545cd-9d58-40d8-9fec-59c5ee5c19a0---850964bb-9417-4cc6-9a97-13e341f61c2c",
       "name": "libdrm-dev",
       "versionInfo": "2.4.127",
-      "licenseConcluded": "MIT",
+      "licenseConcluded": "LicenseRef-19bd4215-a4d4-4ffe-8e54-fcd9558d4e96",
       "licenseDeclared": "LicenseRef-19bd4215-a4d4-4ffe-8e54-fcd9558d4e96",
       "homepage": "https://cgit.freedesktop.org/mesa/drm/",
       "downloadLocation": "NOASSERTION",
-      "originator": "Organization: opensuse",
+      "originator": "Organization: debian",
       "supplier": "NOASSERTION",
       "externalRefs": [
         {
           "referenceCategory": "OTHER",
-          "referenceLocator": "f654e41c-a8f9-4b9b-a0c0-40b883509e28",
+          "referenceLocator": "ea0dbc13-fbce-4484-8c4c-d3db461a174d",
           "referenceType": "BlackDuck-ComponentOrigin"
         },
         {
           "referenceCategory": "PACKAGE-MANAGER",
-          "referenceLocator": "pkg:rpm/opensuse/libdrm@2.4.127-1.1?arch=s390x",
+          "referenceLocator": "pkg:deb/debian/libdrm@2.4.127-1",
           "referenceType": "purl"
         }
       ],
@@ -73,17 +60,12 @@
     {
       "spdxElementId": "SPDXRef-DOCUMENT",
       "relationshipType": "DESCRIBES",
-      "relatedSpdxElement": "SPDXRef-package-436a0436-74ad-4fc6-bf53-a3dc907ca3c9"
+      "relatedSpdxElement": "SPDXRef-package-5d9545cd-9d58-40d8-9fec-59c5ee5c19a0"
     },
     {
-      "spdxElementId": "SPDXRef-package-436a0436-74ad-4fc6-bf53-a3dc907ca3c9",
+      "spdxElementId": "SPDXRef-package-5d9545cd-9d58-40d8-9fec-59c5ee5c19a0",
       "relationshipType": "CONTAINS",
-      "relatedSpdxElement": "SPDXRef-package-850964bb-9417-4cc6-9a97-13e341f61c2c"
-    },
-    {
-      "spdxElementId": "SPDXRef-package-436a0436-74ad-4fc6-bf53-a3dc907ca3c9",
-      "relationshipType": "CONTAINS",
-      "relatedSpdxElement": "SPDXRef-package-9fb83b58-2204-4c04-b9b3-ec54d60f1839"
+      "relatedSpdxElement": "SPDXRef-package-5d9545cd-9d58-40d8-9fec-59c5ee5c19a0---850964bb-9417-4cc6-9a97-13e341f61c2c"
     }
   ]
 }
